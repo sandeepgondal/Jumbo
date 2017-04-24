@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Routing Example</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <h1>Hello Angular --- Routing</h1>
+
+    <div ng-app="myRouting" ng-controller="myController">
+        {{user.firstName}} - {{user.lastName}}
+        </br>
+        </br>
+        <a href="#/route1">Route 1</a>
+        <a href="#/route2">Route 2</a>
+
+        <div ng-view></div>
+    </div>
+</body>
+</html>

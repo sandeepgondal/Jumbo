@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Angular App</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="js/myAngular.js"></script>
+    <script src="js/directives/myDirective.js"></script>
+    <script src="js/services/myServices.js"></script>
+    <script src="js/filters/myFilter.js"></script>
+    <script src="js/controllers/myController.js"></script>
+</head>
+<body>
+    <h1>Hello Angular</h1>
+
+    <div ng-app="myFirstAngular" ng-controller="myController">
+        <label>Name :</label>
+        <input type="text" ng-model="userName" ng-minlength="5" ng-maxlength="12">
+        </br>
+        </br>
+        <label>Age :</label>
+        <input type="number" ng-model="age">
+        </br>
+        </br>
+        <input type="checkbox" ng-model="agree">Agree</input>
+        </br>
+        </br>
+        <input type="radio" ng-model="gender" value="Male">Male</input>
+        <input type="radio" ng-model="gender" value="Female">Female</input>
+        </br>
+        </br>
+        <select ng-model="car">
+            <option value="swift">Swift</option>
+            <option value="jazz">Jazz</option>
+            <option value="baleno">Baleno</option>
+        </select>
+        </br>
+        </br>
+        <input type="button" ng-click="submitData()" value="Submit Data" />
+        </br>
+        </br>
+        {{userName}}
+        </br>
+        <label>Expression : </label>
+        {{3 + 2}}
+        </br>
+        </br>
+        <table>
+            <tr ng-repeat="rec in userList | adults">
+                <td>
+                    <li>
+                        <greet user='rec'></greet>
+                    </li>
+                </td>
+            </tr>
+        </table>
+        </br>
+        </br>
+    </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean name="myXMLBean1" class="com.sandy.spring.di.withXmlConfigFile.MyXMLBean1" />
+    <bean id="myXMLBean2" class="com.sandy.spring.di.withXmlConfigFile.MyXMLBean2" />
+
+    <bean name="myXMLBean" class="com.sandy.spring.di.withXmlConfigFile.MyXMLBean">
+        <property name="myXMLBean1" ref="myXMLBean1" />
+        <property name="myXMLBean2" ref="myXMLBean2" />
+    </bean>
+
+    <bean id="myBean" class="com.sandy.spring.di.contextAware.MyBean" />
+    <bean id="anotherBean" class="com.sandy.spring.di.contextAware.AnotherBean" />
+
+    <!-- Bean to test config properties -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="database.properties" />
+    </bean>
+
+    <bean id= "myPropBean" class="com.sandy.spring.di.configProperties.MyPropBean">
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <property name="jdbcUsername" value="${jdbc.username}" />
+        <property name="jdbcPassword" value="${jdbc.password}" />
+    </bean>
+
+    <!-- Bean to test resource messages -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="locale.messages" />
+    </bean>
+
+    <context:component-scan base-package="com.sandy.spring.di.withAnnotation" />
+    <context:component-scan base-package="com.sandy.spring.aop" />
+
+
+    <!-- AOP configuration -->
+    <aop:aspectj-autoproxy />
+
+    <aop:config>
+        <aop:aspect ref="myAspectWithConfiguration">
+            <aop:pointcut id="all" expression="execution(* com.sandy.spring.aop.MyAOPBean.myMethod())" />
+            <aop:after pointcut-ref="all" method="myAfterAdvice" />
+        </aop:aspect>
+    </aop:config>
+
+</beans>
